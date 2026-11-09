@@ -16,3 +16,5 @@ services:
       interval: 10s
       timeout: 5s
       start_period: 30s
+volumes:
+  mysql-data:

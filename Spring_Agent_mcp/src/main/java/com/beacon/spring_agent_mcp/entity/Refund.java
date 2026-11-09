@@ -4,6 +4,8 @@ import com.beacon.spring_agent_mcp.Enum.RefundStatus;
 import com.beacon.spring_agent_mcp.Enum.RefundType;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,11 +22,17 @@ public class Refund {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_id", nullable = false)
     private Payment payment;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String reason;
+    private BigDecimal amount;
+    private String currency;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "refund_type", nullable = false)

@@ -3,7 +3,6 @@ package com.beacon.spring_agent_mcp.ServiceTool;
 import com.beacon.spring_agent_mcp.Enum.PaymentStatus;
 import com.beacon.spring_agent_mcp.dto.SupportSystemDto.TicketHistory;
 import com.beacon.spring_agent_mcp.dto.SupportSystemDto.TicketInfo;
-import com.beacon.spring_agent_mcp.dto.SupportSystemDto.PaymentInfo;
 import com.beacon.spring_agent_mcp.dto.SupportSystemDto.WarrantyStatus;
 import com.beacon.spring_agent_mcp.dto.SupportSystemDto.DuplicateChargeResult;
 import com.beacon.spring_agent_mcp.dto.SupportSystemDto.ProductInfo;
@@ -63,7 +62,7 @@ public class SupportQueryTools {
     }
 
     //Product Search Tools
-    @McpTool(name = "serach_products",
+    @McpTool(name = "search_products",
             description ="Search the product catalog by name or SKU fragment, Use for pre-sales"+
     "Question or to identify which product a customer is describing.")
     public List<ProductInfo> serachProducts(@McpToolParam(description = "A product name or SKU fragment, e.g. \"X200\" or \" blende\"") String query){
@@ -79,7 +78,7 @@ public class SupportQueryTools {
     }
 
 
-    @McpTool(name = "detect duplicate_charge",
+    @McpTool(name = "detect_duplicate_charge",
     description = "Analyse the Payments on an order to detect a duplicate/double charge" +
             "Compare the total captured against the order total and flages repeated" +
             "charges of the same amount. Use when user says they were charged twice")
@@ -109,10 +108,10 @@ public class SupportQueryTools {
         return new DuplicateChargeResult(OrderNumer, duplicate, captured.size(), totalCharged,
                 expected, overcharged, captured.stream().map(mapper::mapToPaymentInfo).toList(), summary);
     }
-    @McpTool(name = "check_warrenty",
-            description = "Check weather a product on an order is still within its warrenty" +
-                    "window, based on the order date plus the product's warrenty length. Use" +
-                    " before approving a warrenty-based refund or replacement.")
+    @McpTool(name = "check_warranty",
+            description = "Check weather a product on an order is still within its warranty" +
+                    "window, based on the order date plus the product's warranty length. Use" +
+                    " before approving a warranty-based refund or replacement.")
     public WarrantyStatus check(@McpToolParam(description = "The order number the product was bought on, e.g. 4198")
                                 String orderNumber,
                                 @McpToolParam(description = "The product SKU(STOCK KEEPING UNIT) to check; optional if" +

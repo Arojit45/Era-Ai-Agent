@@ -1,11 +1,7 @@
 package com.beacon.spring_agent_mcp.dto;
 
-import com.beacon.spring_agent_mcp.Enum.OrderStatus;
 import com.beacon.spring_agent_mcp.entity.Order_items;
 import com.beacon.spring_agent_mcp.entity.Payment;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public final class SupportSystemDto {
-    private record SupportDto(){}
     public record CustomerInfo(
             Long id,
             String fullName,
